@@ -1,0 +1,38 @@
+import streamlit as st
+from PIL import Image
+import os
+
+# 1. Page Configuration
+st.set_page_config(page_title="Dark Father | Mandela Series", layout="centered")
+
+# 2. The Original Visual (Fixed)
+# This looks for the image file in your repo
+image_path = 'dark_father.png' 
+
+if os.path.exists(image_path):
+    image = Image.open(image_path)
+    st.image(image, use_column_width=True)
+else:
+    st.warning("⚠️ Dark Father visual not found in root directory. Please upload 'dark_father.png'.")
+
+# 3. Branding & Title
+st.title("🎛️ Dark Father")
+st.caption("Mandela Series: Distortion & Compression Engine")
+st.markdown("---")
+
+# 4. Pedal Controls (Connecting to your C++ Logic)
+st.subheader("Effect Parameters")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    gain = st.slider("Distortion Gain", 0.0, 11.0, 5.0) # Goes to 11, obviously.
+    tone = st.slider("Tone Shape", 0.0, 1.0, 0.5)
+
+with col2:
+    comp = st.slider("Compression Level", 0.0, 1.0, 0.3)
+    output = st.slider("Master Output", 0.0, 1.0, 0.8)
+
+# 5. Status Indicator
+if st.button("Engage Pedal"):
+    st.success("Dark Father Engine Active. May the Force (of the distortion) be with you.")
